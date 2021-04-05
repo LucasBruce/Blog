@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Blog</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="style/styleCss.css"/>-->
+    
+</head>
+<body>
+ 
+    <header>
+        <nav class="navbar navbar-light bg-light">
+            <span class="navbar-brand mb-0 h1" style="font-weight: bold;">Blog</span>
+             <div class="btn-group" role="group" aria-label="Basic outlined example">
+               <a th:href="@{/novoPost}" class="btn btn-primary" role="button">Novo Post</a>
+               <a th:href="@{/logout}"class="btn btn-outline-secondary">Sair</a>
+            </div>
+        </nav>
+        <div w3-include-html="navebar.html"></div>
+        
+    </header>
+    <br>
+      <div class="container my-2">    
+       <form th:action="@{/pesquisar1}" method="post">
+        <div class="input-group mb-3">
+		  <input type="text" class="form-control" name="pesquisa" placeholder="Título do artigo..." aria-label="Recipient's username" aria-describedby="button-addon2">
+		  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Buscar</button>
+		  </div>
+	   </form>
+	</div>
+    <section>
+    <div class="container"  style="width: 60%; padding-bottom: 30px;">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" style="background-color: white; padding-left: 0px;">
+                <li class="breadcrumb-item active" aria-current="page">Artigos</li>
+            </ol>
+        </nav>
+        <div class="card shadow-sm bg-white rounded" style="margin-top: 20px;" th:each="post : ${posts}">
+         <div class="btn-group" role="group" aria-label="Basic outlined example">
+			  <a th:href="@{/novoPost}" class="btn btn-outline-primary">Novo</a>
+			  <a th:href="@{/editar/{id}(id=${post.id})}" class="btn btn-outline-warning">Editar</a>
+			  <a th:href="@{/delete/{id}(id=${post.id})}" class="btn btn-outline-danger">Deletar</a>
+			</div>
+            <div class="card-body">
+                <p class="card-subtitle mb-2 text-muted" style="font-size: 0.8rem;">
+                    <span th:text="${post.autor}"></span>
+                    <span th:text="${post.data}"></span>
+                </p>
+                <a th:href="${(#mvc.url('PC#getDetailsPost').arg(0, post.id)).build()}"><h4 class="card-title" style="font-weight: bold; color: black; padding-top: 5px;"><span th:text="${post.titulo}"></span></h4></a>
+                <p class="card-text"><span th:utext="${#strings.abbreviate(post.texto,400)} "></span></p>
+                <!--<a th:href="${(#mvc.url('BC#getPostDetails').arg(0, post.id)).build()}" class="card-link">Acessar</a>-->
+            </div>
+        </div>
+    </div>
+    </section>
+
+</body>
+</html>
