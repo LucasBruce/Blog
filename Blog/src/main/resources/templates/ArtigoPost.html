@@ -35,18 +35,19 @@
                 <li class="breadcrumb-item active" aria-current="page">Artigos</li>
             </ol>
         </nav>
-       
-        <div class="card" th:each="post : ${posts}">
-		  <h5 class="card-header">Featured</h5>
-		  <div class="card-body">
-		    <p class="card-subtitle mb-2 text-muted" style="font-size: 0.8rem;">
+        <div style="margin-top: 20px;" th:each="post : ${posts}">
+         
+            <div class="card-body">
+                <p class="card-subtitle mb-2 text-muted" style="font-size: 0.8rem;">
                     <span th:text="${post.autor}"></span>
                     <span th:text="${post.data}"></span>
                 </p>
                 <a th:href="${(#mvc.url('PC#getDetailsPost').arg(0, post.id)).build()}"><h4 class="card-title" style="font-weight: bold; color: black; padding-top: 5px;"><span th:text="${post.titulo}"></span></h4></a>
                 <p class="card-text"><span th:utext="${#strings.abbreviate(post.texto,100)} "></span></p>
-		  </div>
-		</div>
+                <!--<a th:href="${(#mvc.url('BC#getPostDetails').arg(0, post.id)).build()}" class="card-link">Acessar</a>-->
+            </div>
+        </div>
+        
     </div>
     </section>
 
