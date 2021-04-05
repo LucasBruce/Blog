@@ -37,10 +37,15 @@
         </nav>
         
 		    <div class="card text-dark bg-light mb-3" style="max-width: 18rem;" th:each="post : ${posts}">
-		  <div class="card-header">Header</div>
+		  <div class="card-header">
+		    <p class="card-subtitle mb-2 text-muted" style="font-size: 0.8rem;">
+                    <span th:text="${post.autor}"></span>
+                    <span th:text="${post.data}"></span>
+                </p>
+          </div>
 		  <div class="card-body">
-		    <h5 class="card-title"><span th:text="${post.titulo}"></span></h5>
-		    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+		    <a th:href="${(#mvc.url('PC#getDetailsPost').arg(0, post.id)).build()}"><h5 class="card-title" style="font-weight: bold; color: black; padding-top: 5px;"><span th:text="${post.titulo}"></span></h5></a>
+		    <p class="card-text"><span th:utext="${#strings.abbreviate(post.texto,100)} "></span></p>
 		  </div>
     </section>
 
