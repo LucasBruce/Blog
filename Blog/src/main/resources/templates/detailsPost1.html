@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <title>MyCodeBlog</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-light bg-light">
+            <span class="navbar-brand mb-0 h1" style="font-weight: bold;">Blog</span>
+            <a th:href="@{/novoPost}" class="btn btn-primary" role="button">Novo Post</a>
+        </nav>
+
+    </header>
+
+    <main>
+    <div class="container"  style="width: 60%;">
+    <br>
+    <br>
+        <article>
+            <h1 class="card-title" style="font-weight: bold; margin-bottom: 20px;"><span th:text="${post.titulo}"></span></h1>
+            <p class="card-subtitle mb-2 text-muted">
+                <i class="material-icons">person_outline</i>
+                <span th:text="${post.autor}"></span>
+                <br>
+                <i class="material-icons">date_range</i>
+                <span th:text="${post.data}"></span>
+            </p>
+            <section>
+                <p class="card-text" style="margin-top: 40px;"><span th:utext="${post.texto}"></span></p>
+            </section>
+            
+        </article>	
+        <hr>
+        <form method="post" th:object="${comentario}">
+		  <div class="mb-3">
+		    Nome:<input type="text" class="form-control" value="" name="usuario">
+		  </div>
+		  <div class="mb-3">
+		    Email:<input type="text" class="form-control" value="" name="email">
+		  </div>
+		  <div class="form-floating">
+			Comentário:<textarea class="form-control" placeholder="...." id="floatingTextarea" name="texto"></textarea>
+		  </div>
+		  <br>
+		  <button type="submit" class="btn btn-primary">Publicar</button>
+		</form>  		
+		<hr/>			      
+    </div>  	    
+    </main>   
+    <div class="container">
+    <div class="card shadow-sm bg-white rounded" style="margin-top: 20px;" th:each="comentario : ${comentarios}">
+            <div class="card-body" style="background-color: rgb(222, 221, 218);">
+                <p class="card-subtitle mb-2 text-muted" style="font-size: 0.8rem;">
+			  
+                    <span th:text="${comentario.usuario}"></span>
+                    <span th:text="${comentario.data}"></span>
+                    <div class="btn-group" role="group" aria-label="Basic outlined example">			  
+			</div>
+                <p class="card-text"><span th:utext="${comentario.texto} "></span></p>
+            </div>
+        </div>
+        </div>  
+</body>
+</html>

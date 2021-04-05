@@ -81,6 +81,17 @@ public class PostController {
 	        mav.addObject("comentarios",comentarios);
 	        return mav;
 	    }
+	 
+	 @GetMapping("/posts/{id}")
+	    public ModelAndView getDetailsPost1(@PathVariable("id") long id){
+		    ModelAndView mav = new ModelAndView("detailsPost1");
+	        post post = this.repository.findById(id).get();
+	        mav.addObject("post", post);
+	        
+	        Iterable<Comentario> comentarios = this.comentarioRep.findByPost(post);
+	        mav.addObject("comentarios",comentarios);
+	        return mav;
+	    }
 	 @RequestMapping(value="/post/{id}", method=RequestMethod.POST)
 	    public String DetailsPost(@PathVariable("id") long id, Comentario comentario){
 		 post post = this.repository.findById(id).get();  
