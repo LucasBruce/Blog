@@ -44,7 +44,7 @@
                 </p>
           </div>
 		  <div class="card-body">
-		    <a th:href="${(#mvc.url('PC#getDetailsPost').arg(0, post.id)).build()}"><h5 class="card-title" style="font-weight: bold; color: black; padding-top: 5px;"><span th:text="${post.titulo}"></span></h5></a>
+		    <h5 class="card-title" style="font-weight: bold; color: black; padding-top: 5px;"><span th:text="${post.titulo}"></span></h5>
 		    <p class="card-text"><span th:utext="${#strings.abbreviate(post.texto,100)} "></span></p>
 		  </div>
     </section>
